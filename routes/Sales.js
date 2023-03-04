@@ -27,7 +27,7 @@ SalesRouter.route("/")
     Sales.create(req.body)
       .then((sales) => {
         Sales.findById(sales._id).then((sales) => {
-          res.statusCode = 201;
+          res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.json(sales);
         });
@@ -62,9 +62,9 @@ SalesRouter.route("/:favId")
     Sales.findByIdAndRemove(id)
       .then((sales) => {
         Sales.findById(sales._id).then((Sales) => {
-          res.statusCode = 204;
+          res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.json(Sales);
+          res.json({meg:"Delete sales data"});
         });
       })
       .catch((err) => console.log(err));
@@ -86,6 +86,7 @@ SalesRouter.route("/:favId")
         Sales.findById(sales._id).then((sales) => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
+          res.json(sales);
         });
       })
       .catch((err) => console.log(err));
