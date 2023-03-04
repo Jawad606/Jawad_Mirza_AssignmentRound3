@@ -24,11 +24,13 @@ SalesRouter.route("/")
   })
   .post(cors.cors, (req, res, next) => {
     req.body.user_id = mongoose.Types.ObjectId(req.body.user_id);
+    console.log(req.body)
     Sales.create(req.body)
       .then((sales) => {
         Sales.findById(sales._id).then((sales) => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
+          console.log(sales)
           res.json(sales);
         });
       })
