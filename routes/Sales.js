@@ -27,7 +27,7 @@ SalesRouter.route("/")
     Sales.create(req.body)
       .then((sales) => {
         Sales.findById(sales._id).then((sales) => {
-          res.statusCode = 200;
+          res.statusCode = 201;
           res.setHeader("Content-Type", "application/json");
           res.json(sales);
         });
@@ -61,8 +61,8 @@ SalesRouter.route("/:favId")
     const id = mongoose.Types.ObjectId(req.params.favId);
     Sales.findByIdAndRemove(id)
       .then((sales) => {
-        Sales.find().then((Sales) => {
-          res.statusCode = 200;
+        Sales.findById(sales._id).then((Sales) => {
+          res.statusCode = 204;
           res.setHeader("Content-Type", "application/json");
           res.json(Sales);
         });
@@ -86,7 +86,6 @@ SalesRouter.route("/:favId")
         Sales.findById(sales._id).then((sales) => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.json(sales);
         });
       })
       .catch((err) => console.log(err));
