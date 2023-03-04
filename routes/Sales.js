@@ -42,6 +42,7 @@ SalesRouter.route("/:favId")
     res.sendStatus(200);
   })
   .patch(cors.cors, (req, res, next) => {
+    console.log(req.body)
     Sales.findByIdAndUpdate(
       req.params.favId,
       {
@@ -61,6 +62,7 @@ SalesRouter.route("/:favId")
 
   .delete(cors.cors, (req, res, next) => {
     const id = mongoose.Types.ObjectId(req.params.favId);
+    console.log(req.body)
     Sales.findByIdAndRemove(id)
       .then((sales) => {
         Sales.findById(sales._id).then((Sales) => {
