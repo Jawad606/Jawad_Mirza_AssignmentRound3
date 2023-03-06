@@ -24,13 +24,13 @@ SalesRouter.route("/")
   })
   .post(cors.cors, (req, res, next) => {
     req.body.user_id = mongoose.Types.ObjectId(req.body.user_id);
-    console.log(req.body)
+    console.log(req.body);
     Sales.create(req.body)
       .then((sales) => {
-        Sales.findById(sales._id).then((sales) => {
+        Sales.find().then((sales) => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          console.log(sales)
+          console.log(sales);
           res.json(sales);
         });
       })
@@ -42,7 +42,7 @@ SalesRouter.route("/:favId")
     res.sendStatus(200);
   })
   .patch(cors.cors, (req, res, next) => {
-    console.log(req.body)
+    console.log(req.body);
     Sales.findByIdAndUpdate(
       req.params.favId,
       {
@@ -62,13 +62,13 @@ SalesRouter.route("/:favId")
 
   .delete(cors.cors, (req, res, next) => {
     const id = mongoose.Types.ObjectId(req.params.favId);
-    console.log(req.body)
+    console.log(req.body);
     Sales.findByIdAndRemove(id)
       .then((sales) => {
         Sales.findById(sales._id).then((Sales) => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
-          res.json({meg:"Delete sales data"});
+          res.json({ meg: "Delete sales data" });
         });
       })
       .catch((err) => console.log(err));
