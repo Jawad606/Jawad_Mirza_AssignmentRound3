@@ -24,7 +24,6 @@ SalesRouter.route("/")
   })
   .post(cors.cors, (req, res, next) => {
     req.body.user_id = mongoose.Types.ObjectId(req.body.user_id);
-    console.log(req.body);
     Sales.create(req.body)
       .then((sales) => {
         Sales.find().then((sales) => {
