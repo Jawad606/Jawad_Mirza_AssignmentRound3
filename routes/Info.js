@@ -16,14 +16,14 @@ InfoRouter.route("/:userId")
     res.sendStatus(200);
   })
   .get(cors.cors, (req, res, next) => {
-    Info.find().then((info) => {
+    Info.find({user_id:req.params.userId}).then((info) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json(info[0]);
+      res.json(info);
     });
   })
   .post(cors.cors, (req, res, next) => {
-    req.body.user_id = mongoose.Types.ObjectId(req.params.user_id);
+    req.body.user_id = mongoose.Types.ObjectId(req.params.userId);
     Info.create(req.body)
       .then((info) => {
         Info.findById(info._id).then((info) => {
