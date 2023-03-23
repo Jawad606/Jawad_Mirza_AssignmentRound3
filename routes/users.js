@@ -103,8 +103,7 @@ router.post("/login", cors.cors, (req, res, next) => {
           });
           res.end();
         }
-        console.log(user.id)
-        var token = authenticate.getToken({ _id: user.id });
+        var token = authenticate.getToken({ _id: req.user._id });
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json({
